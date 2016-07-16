@@ -1,0 +1,79 @@
+<!Doctype html>
+
+<html>
+    <header>
+        <title>Setup</title>
+        <link rel="stylesheet" href="index.css"/>
+        
+    </header>
+    <body>
+        <section>
+            <table>
+            <tr>
+                <td>
+                    <article id="first"> 
+                        <h1>Hello There !</h1>
+                        <p>Here is your first lucky star</p>
+                        <img id="logo" src="image/logo.svg"/><br/>
+                        <button class="button" onclick="changePage(event)">Discover</button>
+                    </article>
+                </td>
+
+                <td>
+                    <article >
+                        <h1>Let's introduce</h1>
+                        <p>What is your name ?</p>
+                        <input type="text" name="name" id="inputName" placeholder="Please enter your name here"/><br/>
+                        <button class="button" onclick="getName(); changePage(event)">Next</button>
+                    </article>
+                </td>
+
+                <td>
+                    <article >
+                        <h1>Nice to meet you <span id="outputName"></span>, I'm LifeLine</h1>
+                        <p>To which number do you want me to call in emergency ?</p>
+                        <input type="text" name="phone" placeholder="Write the number here"/><br/>
+                        <button class="button" onclick="changePage(event)">Next</button>                
+                    </article>
+                </td>
+
+                <td>
+                    <article >
+                        <h1>What are you afraid of ?</h1>
+                        <p>
+                            Tell us what are the words you want us to listen to.<br/>
+                            Put the safewords separed with a ",".
+                        </p>
+                        <input id="keywords" type="text" name="keyword"/><br/>
+                        <button class="button" onclick="sendData();changePage()">Next</button>                
+                    </article>
+                </td>
+
+                <td>
+                    <article >
+                        <h1>We need to now your voice</h1>
+                        <p>Click on "getMicrophone" and say "fire".</p>
+                        <div class="button">
+                            <button onclick="getMicrophone()">Get Microphone</button>
+                            <button onclick="stopRecording()">Stop recording</button>
+                            <button onclick="uploadAudio()">Upload</button><br/>
+                            <a id="link" ><button>Finished</button></a>
+                        </div><br/>
+                        <sapn id="output"></span> 
+                                
+                    </article>
+                </td>
+
+            </tr>
+            </table>
+        </section>
+        <script src="greensock/plugins/ScrollToPlugin.min.js"></script>        
+        <script src="greensock/TimelineMax.min.js"></script>
+        <script src="greensock/TweenMax.min.js"></script>
+        <script src="index.js"></script>
+        <script src="animation.js"></script>        
+        <script src="soundRecorder.js"></script>
+    </body>
+    
+</html>
+<!-- action="http://api.scriptrapps.io/m2x/postdada?auth_token=STlERTNEN0QyRA==" -->
