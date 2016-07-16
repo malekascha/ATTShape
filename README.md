@@ -5,13 +5,13 @@ This repository is a hackathon project focusing on public and personal safety ut
 
 To install locally:
 
-git clone https://github.com/malekascha/ATTShape.git
+`git clone https://github.com/malekascha/ATTShape.git`
 
-cd ATTShape
+`cd ATTShape`
 
-cd Watson_service
+`cd Watson_service`
 
-npm install
+`npm install`
 
 The objectives for this project were to increase public and home safety by utilizing microphones connected to via the IoT. 
 
