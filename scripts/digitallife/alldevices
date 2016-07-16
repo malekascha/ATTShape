@@ -1,0 +1,31 @@
+var http = require('http');
+
+var authRequest = {
+  url: 'https://systest.digitallife.att.com:443/penguin/api/authtokens?userId=553474807&password=NO-PASSWD&domain=DL&appKey=VE_07B728EB96569894_1&rememberMe=false',
+  method: 'POST'
+};
+
+var authInfoRes = http.request(authRequest);
+
+var authBody = JSON.parse(authInfoRes.body);
+
+var gateway = authBody.content.gateways[0].id;
+
+var allDeviceRequest = {
+  url: 'https://systest.digitallife.att.com:443/penguin/api/' + gateway + '/devices',
+  method: 'GET'
+};
+
+allDeviceRequest.headers = {
+  'authToken': authBody.content.authToken,
+  'requestToken': authBody.content.requestToken,
+  'appKey': 'VE_07B728EB96569894_1'
+};
+
+//console.log(allDeviceRequest.headers.toString());
+
+var allDevicesRes = http.request(allDeviceRequest);
+
+//var allDevices = JSON.parse(allDevicesRes.body);
+
+return allDevicesRes;

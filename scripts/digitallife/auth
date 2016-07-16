@@ -1,0 +1,14 @@
+var http = require('http');
+
+var requestObj = {
+  url: 'https://systest.digitallife.att.com:443/penguin/api/authtokens?userId=553474807&password=NO-PASSWD&domain=DL&appKey=VE_07B728EB96569894_1&rememberMe=false',
+  method: 'POST'
+};
+
+var res = http.request(requestObj);
+
+var body = JSON.parse(res.body)
+
+//var gateway = body.gateways[0].id;
+
+return body;

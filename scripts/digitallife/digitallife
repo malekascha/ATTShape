@@ -1,0 +1,71 @@
+var http = require('http');
+
+function DigitalLife(){
+  this.appKey = 'VE_07B728EB96569894_1';
+};
+
+DigitalLife.prototype.authenticate = function(userId){
+  var authRequest = {
+  		url: 'https://systest.digitallife.att.com:443/penguin/api/authtokens?userId='+userId+'&password=NO-PASSWD&domain=DL&appKey='+this.appKey+'&rememberMe=false',
+  		method: 'POST'
+  };
+
+ return http.request(authRequest);
+};
+
+DigitalLife.prototype.callEmergencyServices = function(gatewayId, authToken, requestToken, service){
+  var fireRequest = {
+    url: 'https://systest.digitallife.att.com:443/penguin/api/' + gatewayId + '/alarm',
+    method: 'POST'
+  };
+
+  fireRequest.headers = {
+    'authToken': authToken,
+    'requestToken': requestToken,
+    'appKey': 'VE_07B728EB96569894_1',
+    'Content-Type': 'application/json'
+  };
+
+  var fireBody = {
+    status: service,
+    bypass: ""
+  };
+
+  fireRequest.bodyString = JSON.stringify(fireBody);
+
+  return http.request(fireRequest);
+}
+
+DigitalLife.prototype.unlockDoor = function(gatewayId, authToken, requestToken, door){
+  var fireRequest = {
+    url: 'https://systest.digitallife.att.com:443/penguin/api/' + gatewayId + '/devices/'+door+'/lock/unlock',
+    method: 'POST'
+  };
+
+  fireRequest.headers = {
+    'authToken': authToken,
+    'requestToken': requestToken,
+    'appKey': 'VE_07B728EB96569894_1',
+    'Content-Type': 'application/json'
+  };
+
+  return http.request(fireRequest);
+}
+
+DigitalLife.prototype.getDevices = function(gatewayId, authToken, requestToken){
+  var fireRequest = {
+    url: 'https://systest.digitallife.att.com:443/penguin/api/' + gatewayId + '/devices',
+    method: 'GET'
+  };
+
+  fireRequest.headers = {
+    'authToken': authToken,
+    'requestToken': requestToken,
+    'appKey': 'VE_07B728EB96569894_1',
+    'Content-Type': 'application/json'
+  };
+
+  var res = http.request(fireRequest);
+  
+  return JSON.parse(res.body);
+}

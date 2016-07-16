@@ -1,0 +1,23 @@
+var http = require('http');
+
+var digitallife = require('./digitallife');
+var DL =  new digitallife.DigitalLife();
+
+var authInfoRes = DL.authenticate('553474807');
+
+var authBody = JSON.parse(authInfoRes.body);
+
+var gateway = authBody.content.gateways[0].id;
+
+var allDevices = DL.getDevices(gateway, authBody.content.authToken, authBody.content.requestToken);
+
+allDevices.content.forEach(function(device){
+  if(device.deviceType === 'door-lock'){
+    DL.unlockDoor(gateway, authBody.content.authToken, authBody.content.requestToken, device.deviceGuid);
+  }
+})
+
+var fireRes = DL.callEmergencyServices(gateway, authBody.content.authToken, authBody.content.requestToken, 'fireLocal');
+
+
+return fireRes;
