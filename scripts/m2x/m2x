@@ -1,0 +1,70 @@
+var http = require('http');
+
+function MX(){
+  this.key = '7d2311bd36898076e06bbcf72af9d164';
+  this.keywords = '5da7e3a380d177f88ddd79f7a694a37e';
+  this.keywordHits = '1ea7f65651be9ab0b5bb14f6626bc343';
+}
+
+MX.prototype.createStream = function(device, name, numeric){
+  var requestObj = {
+    "url": 'https://api-m2x.att.com/v2',
+    "method": 'PUT'
+  };
+
+  requestObj.headers = {
+    "Content-Type": 'application/json',
+    "X-M2X-KEY": this.key
+  };
+
+  requestObj.url += '/devices/'+this[device];
+  requestObj.url += '/streams/'+name;
+  
+  var body = {
+    type: numeric ? 'numeric' : 'alphanumeric'
+  }
+  
+  requestObj.bodyString = JSON.stringify(body);
+  
+  return http.request(requestObj);
+};
+
+MX.prototype.updateStream = function(device, stream, value){
+  var requestObj = {
+    "url": 'https://api-m2x.att.com/v2',
+    "method": 'PUT'
+  };
+
+  requestObj.headers = {
+    "Content-Type": 'application/json',
+    "X-M2X-KEY": this.key
+  };
+
+  requestObj.url += '/devices/'+this[device];
+  requestObj.url += '/streams/'+stream+'/value';
+  
+  var body = {
+    "value": value
+  }
+  
+  requestObj.bodyString = JSON.stringify(body);
+  
+  return http.request(requestObj);
+}
+
+MX.prototype.retrieveAllStreams = function(device){
+  var requestObj = {
+    "url": 'https://api-m2x.att.com/v2',
+    "method": 'GET'
+  };
+
+  requestObj.headers = {
+    "Content-Type": 'application/json',
+    "X-M2X-KEY": this.key
+  };
+
+  requestObj.url += '/devices/'+this[device];
+  requestObj.url += '/values';
+  
+  return http.request(requestObj);
+}

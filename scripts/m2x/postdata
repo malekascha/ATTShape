@@ -1,0 +1,6 @@
+var mx = require('./m2x');
+var m_interface = new mx.MX();
+
+var res = m_interface.updateStream('keywords', 'keywords', request.rawBody)
+
+return res;			

@@ -1,0 +1,37 @@
+var mx = require('./m2x');
+var m_interface = new mx.MX();
+var http = require('http');
+
+var allStreamsRes = m_interface.retrieveAllStreams('keywordHits');
+
+var body = JSON.parse(allStreamsRes.body);
+var words = {};
+body.values.forEach(function(value){
+  for(var key in value){
+    if(!words[key]){
+      words[key] = [];
+    }
+    words[key].push(value);
+  }
+});
+var present = new Date();
+var hits = 0;
+var deltas = [];
+for(var keyword in words){
+  words[keyword].forEach(function(alert){
+    var date = new Date(alert.timestamp);
+    var timeDelta = present - date;
+    deltas.push(timeDelta);
+    if(timeDelta < 2000000){
+      hits++;
+    }
+  });
+}
+if(hits >= 2){
+  var alertReq = {
+    url: 'https://api.scriptrapps.io/digitallife/callfire?auth_token=STlERTNEN0QyRA==',
+    method: 'POST'
+  };
+  return http.request(alertReq);
+}
+return 'Not enough keyword mentions to trigger alert';

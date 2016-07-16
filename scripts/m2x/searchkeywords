@@ -1,0 +1,53 @@
+var http = require('http');
+var mx = require('./m2x');
+var m_interface = new mx.MX();
+
+var keywordRequestObj = {
+  "url": 'https://api-m2x.att.com/v2',
+  "method": 'GET'
+};
+
+keywordRequestObj.headers = {
+  "Content-Type": 'application/json',
+  "X-M2X-KEY": '7d2311bd36898076e06bbcf72af9d164'
+};
+
+keywordRequestObj.url += '/devices/5da7e3a380d177f88ddd79f7a694a37e';
+keywordRequestObj.url += '/streams/keywords'
+
+var res = http.request(keywordRequestObj);
+
+var keywordInfo = JSON.parse(res.body);
+
+var keywords = keywordInfo.value.split(',');
+
+keywords.forEach(function(word, index){
+  keywords[index] = word.replace(/\s/g, '');
+});
+
+var hits = {};
+
+var inputWords = request.rawBody.split(' ');
+
+inputWords.forEach(function(word){
+  var loc = keywords.indexOf(word);
+  if(loc > -1){
+    if(!hits[keywords[loc]]){
+      hits[keywords[loc]] = 1;
+    } else {
+      hits[keywords[loc]]++;
+    }
+  }
+});
+
+if(Object.keys(hits).length > 0){
+  for(var word in hits){
+    m_interface.createStream('keywordHits', word, true);
+    m_interface.updateStream('keywordHits', word, hits[word]);
+  }
+}
+
+return http.request({
+  url: 'https://api.scriptrapps.io/m2x/checkalerts?auth_token=STlERTNEN0QyRA==',
+  method: 'GET'
+});
