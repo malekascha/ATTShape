@@ -27,9 +27,15 @@ for(var keyword in words){
     }
   });
 }
-if(hits >= 2){
+if(hits >= 3){
   var alertReq = {
     url: 'https://api.scriptrapps.io/digitallife/callfire?auth_token=STlERTNEN0QyRA==',
+    method: 'POST'
+  };
+  return http.request(alertReq);
+} else if(hits >=5){
+  var alertReq = {
+    url: 'https://api.scriptrapps.io/digitallife/callpolice?auth_token=STlERTNEN0QyRA==',
     method: 'POST'
   };
   return http.request(alertReq);
