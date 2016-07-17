@@ -28,6 +28,8 @@ var medicalBody = {
   bypass: ""
 };
 
+DL.unlockAllDoors();
+
 medicalRequest.bodyString = JSON.stringify(medicalBody);
 
 var medicalRes = http.request(medicalRequest);

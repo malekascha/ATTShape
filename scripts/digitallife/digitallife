@@ -52,6 +52,17 @@ DigitalLife.prototype.unlockDoor = function(gatewayId, authToken, requestToken, 
   return http.request(fireRequest);
 }
 
+DigitalLife.prototype.unlockAllDoors = function(allDevices){
+  var responses = [];
+  allDevices.content.forEach(function(device){
+    if(device.deviceType === 'door-lock'){
+      var res = DigitalLife.prototype.unlockDoor(gateway, authBody.content.authToken, authBody.content.requestToken, device.deviceGuid);
+      responses.push(res);
+    }
+  });
+  return responses;
+}
+
 DigitalLife.prototype.getDevices = function(gatewayId, authToken, requestToken){
   var fireRequest = {
     url: 'https://systest.digitallife.att.com:443/penguin/api/' + gatewayId + '/devices',
