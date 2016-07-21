@@ -11,7 +11,7 @@ var gateway = authBody.content.gateways[0].id;
 
 var allDevices = DL.getDevices(gateway, authBody.content.authToken, authBody.content.requestToken);
 
-DL.unlockAllDoors();
+DL.unlockAllDoors(allDevices, authBody.content.authToken, authBody.content.requestToken);
 
 var fireRes = DL.callEmergencyServices(gateway, authBody.content.authToken, authBody.content.requestToken, 'fireLocal');
 
