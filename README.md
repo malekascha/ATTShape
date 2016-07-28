@@ -3,7 +3,7 @@
 
 This repository is a hackathon project focusing on public and personal safety utlizing the ATT Digital Life, ATT M2X IoT Services, IBM Watson APIs and Qualcomm hardware.
 
-Scriptr was used to interact with the AT&T M2X and Digital Life APIs. The scripts used to interact with them can be found in the scripts directory. For each set of scripts, there were utility functions used across them. [Click here](./blob/master/scripts/digitallife/digitallife) to see the Digital Life utility functions, and [click here](./blob/master/scripts/m2x/m2x) to see the M2X utility functions.
+[Scriptr](https://scriptr.io) was used to interact with the AT&T M2X and Digital Life APIs. The scripts used to interact with them can be found in the scripts directory. For each set of scripts, there were utility functions used across them. [Click here](./blob/master/scripts/digitallife/digitallife) to see the Digital Life utility functions, and [click here](./blob/master/scripts/m2x/m2x) to see the M2X utility functions.
 
 To install locally:
 
